@@ -1,0 +1,16 @@
+@media screen and (max-width:767px) {
+    .center-block{
+        padding: 20px 10px;
+    }
+    .center-block h1{
+        font-size: 20px;
+    }
+    .center-block h5{
+        font-size: 15px;
+    }
+}
+@media screen and (max-width:1024px) {
+    .center-block{
+        width: 90%;
+    }
+}

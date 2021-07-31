@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Banner;
 use App\Models\Bid;
+use App\Models\Category;
 use App\Models\CashCard;
 use App\Models\ScratchCard;
 use App\Models\User;
@@ -36,6 +37,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $categories = count(Category::all());
         $cash_card = count(CashCard::all());
         $cash_card_active = count(CashCard::where('status',1)->get());
         $scratch_card = count(ScratchCard::all());
@@ -50,6 +52,7 @@ class HomeController extends Controller
         $banner_active = count(Banner::where('status',1)->get());
         $banner_inactive = count(Banner::where('status',0)->get());
         return view('home',[
+            'categories' => $categories,
             'cash_card' => $cash_card,
             'cash_card_active' => $cash_card_active,
             'scratch_card' => $scratch_card,

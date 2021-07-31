@@ -19,6 +19,17 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-5">
+            <div class="card dash-box" style="background:springgreen">
+                <div class="card-header">Categories</div>
+                <a href="{{('/categories/list')}}" class="card-body">
+                    <p>Total Categories: {{$categories}}</p>
+                </a>
+                <div class="card-footer" style="background: rgb(6, 146, 76)">
+                    <a href="{{url('/categories/add')}}" class=""><i class="mdi mdi-plus"></i> ADD CATEGORY</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-5">
             <div class="card dash-box" style="background: blueviolet">
                 <div class="card-header">Cash Cards</div>
                 <a href="{{('/cash-cards/list')}}" class="card-body">

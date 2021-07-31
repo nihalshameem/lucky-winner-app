@@ -36,6 +36,23 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="" class="col-3">Categories:</label>
+                        <div class="col-9">
+                            <select name="cat_id" id="" class="form-control form-control-sm">
+                                @foreach ($categories as $item)
+                                @if ($cat_deactive)
+                                    <option value={{$item->id}} {{$cash_card->cat_id == $item->id && $cat_deactive ? 'selected disabled':''}}>{{$item->name}}</option>
+                                @else
+                                <option value={{$item->id}} {{$cash_card->cat_id == $item->id ? 'selected':''}}>{{$item->name}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                            {!! $errors->first('cat_id', '<small class="text-danger">Select a category.</small>') !!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group row">
                         <label for="" class="col-3">Status:</label>
                         <div class="col-9">
                             <select name="status" id="" class="form-control form-control-sm">
@@ -48,7 +65,7 @@
                 <div class="col-lg-12">
                     <hr>
                     <button type="button" id="deleteBtn" data-id="{{$cash_card->id}}" class="btn btn-sm btn-danger float-right">Delete</button>
-                    <button type="submit" class="btn btn-sm btn-success mr-2 float-right">Save</button>
+                    <button type="submit" class="btn btn-sm btn-success mr-2 float-right">Update</button>
                 </div>
             </div>
         </form>

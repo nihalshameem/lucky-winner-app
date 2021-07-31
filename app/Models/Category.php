@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable=['name','image'];
+    protected $fillable=['name','image','status'];
 
      /**
      * Get the cash cards associated with the category.

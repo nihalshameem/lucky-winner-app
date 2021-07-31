@@ -7,7 +7,7 @@
             <div class="card admin-login text-center">
 
                 <div class="card-body">
-                    <h2 class="text-center mb-5">CashCards Admin</h2>
+                    <h2 class="text-center mb-5">Lucky Winners Admin</h2>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 

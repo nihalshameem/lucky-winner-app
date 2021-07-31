@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>CashCards | Admin @yield('title')</title>
+    <title>Lucky Winners | Admin @yield('title')</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/materialdesignicons.min.css') }}" rel="stylesheet">

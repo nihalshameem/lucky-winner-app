@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCashCardsTable extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,11 @@ class CreateCashCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cash_cards', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('cat_id');
-            $table->decimal('amount',5,2);
-            $table->string('image');
-            $table->boolean('status')->default(1);
+            $table->string('image')->nullable();
             $table->timestamps();
-
-            $table->foreign('cat_id')->references('id')->on('categories')
-            ->onDelete('cascade');
         });
     }
 
@@ -34,6 +28,6 @@ class CreateCashCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cash_cards');
+        Schema::dropIfExists('categories');
     }
 }

@@ -11,6 +11,9 @@
             @auth
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ Request::segment(1) === 'categories' ? 'active' : null }}">
+                    <a class="nav-link" href="{{url('/categories/list')}}">Categories</a>
+                </li>
                 <li class="nav-item {{ Request::segment(1) === 'cash-cards' ? 'active' : null }}">
                     <a class="nav-link" href="{{url('/cash-cards/list')}}">Cash cards</a>
                 </li>

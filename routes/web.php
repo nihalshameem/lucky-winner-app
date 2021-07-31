@@ -33,6 +33,17 @@ Route::namespace ('App\Http\Controllers')->group(function () {
     Route::post('/withdraw-request/list', 'HomeController@minWithdraw');
 });
 
+// Admin categories
+Route::namespace ('App\Http\Controllers\admin')->group(function () {
+    Route::any('/categories/list', 'CategoriesController@CategoryList');
+    Route::post('/categories/list/search', 'CategoriesController@search');
+    Route::any('/categories/add', 'CategoriesController@addPage');
+    Route::post('/categories/add/new', 'CategoriesController@addNew');
+    Route::get('/categories/edit/{id}', 'CategoriesController@editPage');
+    Route::post('/categories/update/{id}', 'CategoriesController@update');
+    Route::post('/categories/delete/{id}', 'CategoriesController@delete');
+});
+
 // Admin cash cards
 Route::namespace ('App\Http\Controllers\admin')->group(function () {
     Route::any('/cash-cards/list', 'CashCardsController@cashCardList');

@@ -12,6 +12,7 @@ class CashCard extends Model
         'name',
         'image',
         'amount',
+        'cat_id',
         'status',
     ];
 

@@ -5,12 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\CashCard;
 use App\Models\Category;
 use Session;
 use Validator;
 
-class CashCardsController extends Controller
+class CategoriesController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,92 +26,73 @@ class CashCardsController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function cashCardList(){
-        $cash_cards = CashCard::paginate(15);
-        foreach ($cash_cards as $key => $value) {
-            $value->cat_name = Category::find($value->cat_id)->name;
-        }
-        return view('admin.cash_cards.list',[
-            'cash_cards' => $cash_cards,
+    public function categoryList(){
+        $categories = Category::paginate(15);
+        return view('admin.categories.list',[
+            'categories' => $categories,
             'search' => '',
         ]);
     }
     public function search(Request $request){
         $search = $request->search;
         if($search == null){
-            return redirect('/cash-cards/list');
+            return redirect('/categories/list');
         }
-        $cash_cards = CashCard::where('name', 'LIKE', "%$search%")->paginate(15);
-        return view('admin.cash_cards.list',[
-            'cash_cards' => $cash_cards,
+        $categories = Category::where('name', 'LIKE', "%$search%")->paginate(15);
+        return view('admin.categories.list',[
+            'categories' => $categories,
             'search' => $search,
         ]);
     }
     public function addPage(){
-        $categories = Category::where('status',1)->get();
-        return view('admin.cash_cards.add',['categories'=>$categories]);
+        return view('admin.categories.add');
     }
 
     public function addNew(Request $request){
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:cash_cards,name',
+            'name' => 'required|string|unique:categories,name',
             'image' => 'required|mimes:jpeg,jpg,png|max:5000',
-            'amount' => 'required|numeric|min:0',
-            'cat_id' => 'required',
             'status' => 'required|numeric',
         ]);
         if ($validator->fails()) {
             Session::flash('error', 'Validation Error');
             return redirect()->back()->withErrors($validator);
         }
-        $new_card = CashCard::create([
+        $new_card = Category::create([
             'name' => $request->name,
             'image' => 'nill',
-            'amount' => $request->amount,
-            'cat_id' => $request->cat_id,
             'status' => $request->status,
         ]);
 
         // image
         $imageFile = $request->file('image');
         $imageExt = $imageFile->getClientOriginalExtension();
-        $imageDestinationPath = public_path('/images/cash_cards/');
+        $imageDestinationPath = public_path('/images/categories/');
         $imageFilename = $new_card->id . '.' . $imageExt;
         $imageFile->move($imageDestinationPath, $imageFilename);
-        $imageFilename = '/images/cash_cards/' . $imageFilename;
+        $imageFilename = '/images/categories/' . $imageFilename;
         $new_card->image = $imageFilename;
         $new_card->save();
-        Session::flash('success','Cash card added');
-        return redirect('/cash-cards/list');
+        Session::flash('success','Category added');
+        return redirect('/categories/list');
     }
 
     public function editPage($id){
-        $cat_deactive = false;
-        $cash_card = CashCard::find($id);
-        $categories = Category::where('status',1)->get();
-        $selected_cat =  Category::find($cash_card->cat_id);
-        if($cash_card == null){
-            Session::flash('error','Cash card not found!');
+        $category = Category::find($id);
+        if($category == null){
+            Session::flash('error','Category not found!');
             return redirect()->back();
         }
-        if ($selected_cat->status !== 1) {
-            $cat_deactive = true;
-            $categories->push($selected_cat);
-        }
-        return view('admin.cash_cards.edit',[
-            'cat_deactive' => $cat_deactive,
-            'cash_card' => $cash_card,
-            'categories' => $categories,
+        return view('admin.categories.edit',[
+            'category' => $category,
         ]);
     }
 
     public function update(Request $request,$id){
-        $update = CashCard::find($id);
+        $update = Category::find($id);
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|unique:cash_cards,name,' . $update->id,
+            'name' => 'required|string|unique:categories,name,' . $update->id,
             'image' => 'nullable|mimes:jpeg,jpg,png|max:5000',
-            'amount' => 'required|numeric|min:0',
-            'cat_id' => 'required',
             'status' => 'required|numeric',
         ]);
         if ($validator->fails()) {
@@ -124,28 +104,26 @@ class CashCardsController extends Controller
             // image
             $imageFile = $request->file('image');
             $imageExt = $imageFile->getClientOriginalExtension();
-            $imageDestinationPath = public_path('/images/cash_cards/');
+            $imageDestinationPath = public_path('/images/categories/');
             $imageFilename = $update->id . '.' . $imageExt;
             $imageFile->move($imageDestinationPath, $imageFilename);
-            $imageFilename = '/images/cash_cards/' . $imageFilename;
+            $imageFilename = '/images/categories/' . $imageFilename;
         }else{
             $imageFilename = $update->image;
         }
         $update->name = $request->name;
-        $update->amount = $request->amount;
-        $update->cat_id = $request->cat_id;
         $update->status = $request->status;
         $update->image = $imageFilename;
         $update->save();
-        Session::flash('success','Cash card updated');
-        return redirect('/cash-cards/list');
+        Session::flash('success','Category updated');
+        return redirect('/categories/list');
     }
 
     public function delete($id){
-        $cash_card = CashCard::find($id);
-        \File::delete(public_path($cash_card->image));
-        $cash_card->delete();
-        Session::flash('success','Cash card deleted');
-        return redirect('/cash-cards/list');
+        $category = Category::find($id);
+        \File::delete(public_path($category->image));
+        $category->delete();
+        Session::flash('success','Category deleted');
+        return redirect('/categories/list');
     }
 }

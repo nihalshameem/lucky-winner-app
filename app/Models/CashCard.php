@@ -14,4 +14,12 @@ class CashCard extends Model
         'amount',
         'status',
     ];
+
+    /**
+     * Get the category that owns the cash card.
+     */
+    public function category()
+    {
+        return $this->belongsTo('App\Category');
+    }
 }

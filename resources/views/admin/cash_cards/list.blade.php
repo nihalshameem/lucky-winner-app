@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container single-container">
-        <h3 class="mb-3">Cash Cards <a href="{{('/cash-cards/add')}}" type="button" class="btn btn-sm bg-white text-dark float-right" data-toggle="tooltip" data-placement="bottom" title="New Cash card"><i class="mdi mdi-plus mdi-24px"></i></a></h3>
+        <h3 class="mb-3">Cash Cards <a href="{{url('/cash-cards/add')}}" type="button" class="btn btn-sm bg-white text-dark float-right" data-toggle="tooltip" data-placement="bottom" title="New Cash card"><i class="mdi mdi-plus mdi-24px"></i></a></h3>
         <form action="{{url('/cash-cards/list/search')}}" method="post" class="form-inline">
             @csrf
             <div class="form-group mx-sm-3 mb-2">
@@ -38,7 +38,7 @@
                             <td>{{$item->cat_name}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->status == 1 ? 'active':'inactive'}}</td>
-                            <td class="text-center"><a href="{{('/cash-cards/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
+                            <td class="text-center"><a href="{{url('/cash-cards/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
                         </tr>
                     @endforeach
                     @if (count($cash_cards) == 0)

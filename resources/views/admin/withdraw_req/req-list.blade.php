@@ -41,8 +41,8 @@
                     <td>{{$item->amount}}</td>
                 </tr>
             </table>
-            <a href="{{('/withdraw-request/decline/'.$item->id)}}" onclick="return confirm('Are you sure?')"  class="btn btn-sm btn-danger float-right">Decline</a>
-            <a href="{{('/withdraw-request/paid/'.$item->id)}}" class="btn btn-sm btn-primary float-right mr-2">Paid</a>
+            <a href="{{url('/withdraw-request/decline/'.$item->id)}}" onclick="return confirm('Are you sure?')"  class="btn btn-sm btn-danger float-right">Decline</a>
+            <a href="{{url('/withdraw-request/paid/'.$item->id)}}" class="btn btn-sm btn-primary float-right mr-2">Paid</a>
         </div>
         @endforeach
         @if ($withdraw_req->lastPage() > 1)

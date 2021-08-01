@@ -28,9 +28,9 @@
                     </td>
                 </tr>
             </table>
-            <a href="{{('/bids/delete/'.$item->id)}}" onclick="return confirm('Are you sure?')"  class="btn btn-sm btn-danger float-right">Delete</a>
-            <a href="{{('/scratch-card/create/'.$item->id)}}" class="btn btn-sm btn-info float-right mr-2" {{$item->card_name == null ? '':'hidden'}}>Add Scratch card</a>
-            <a href="{{('/scratch-cards/view/'.$item->id)}}" class="btn btn-sm btn-info float-right mr-2" {{$item->card_name == null ? 'hidden':''}}>View Scratch card</a>
+            <a href="{{url('/bids/delete/'.$item->id)}}" onclick="return confirm('Are you sure?')"  class="btn btn-sm btn-danger float-right">Delete</a>
+            <a href="{{url('/scratch-card/create/'.$item->id)}}" class="btn btn-sm btn-info float-right mr-2" {{$item->card_name == null ? '':'hidden'}}>Add Scratch card</a>
+            <a href="{{url('/scratch-cards/view/'.$item->id)}}" class="btn btn-sm btn-info float-right mr-2" {{$item->card_name == null ? 'hidden':''}}>View Scratch card</a>
         </div>
         @endforeach
         @if ($bids->lastPage() > 1)

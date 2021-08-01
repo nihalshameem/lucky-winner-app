@@ -36,7 +36,7 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->phone}}</td>
                             <td>{{$item->wallet}}</td>
-                            <td class="text-center"><a href="{{('/customers/details/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-account-details"></i></a></td>
+                            <td class="text-center"><a href="{{url('/customers/details/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-account-details"></i></a></td>
                         </tr>
                     @endforeach
                     @if (count($customers) == 0)

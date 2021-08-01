@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Banner;
 use App\Models\Bid;
+use App\Models\Category;
 use App\Models\CashCard;
 use App\Models\ScratchCard;
 use App\Models\Customer;
@@ -18,6 +19,21 @@ use Validator;
 class ApiController extends Controller
 {
 
+    public function categories($token)
+    {
+        $user = Customer::where('api_token', $token)->first();
+        if ($user == null) {
+            return response()->json([
+                'status' => '0',
+                'message' => 'Authentication error'
+            ]);
+        }
+        $categories = Category::where('status', 1)->get();
+        return response()->json([
+            'categories' => $categories,
+        ]);
+    }
+
     public function cashCards($token)
     {
         $user = Customer::where('api_token', $token)->first();
@@ -28,6 +44,14 @@ class ApiController extends Controller
             ]);
         }
         $cash_cards = CashCard::where('status', 1)->get();
+        foreach ($cash_cards as $key => $value) {
+            $category = Category::find($value->cat_id);
+            if ($category->status !== 1) {
+                $cash_cards->forget($key);
+            }else{
+                $value->category = $category;
+            }
+        }
         return response()->json([
             'cash_cards' => $cash_cards,
         ]);

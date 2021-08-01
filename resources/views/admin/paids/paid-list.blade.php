@@ -29,7 +29,7 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{date('Y-m-d',strtotime($item->created_at))}}</td>
-                            <td class="text-center"><a href="{{('/paids/details/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-account-details"></i></a></td>
+                            <td class="text-center"><a href="{{url('/paids/details/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-account-details"></i></a></td>
                         </tr>
                     @endforeach
                     @if (count($paids) == 0)

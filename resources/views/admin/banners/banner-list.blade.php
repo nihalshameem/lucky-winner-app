@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <div class="container single-container">
-        <h3 class="mb-3">Banners <a href="{{('/banners/add')}}" type="button" class="btn btn-sm bg-white text-dark float-right" data-toggle="tooltip" data-placement="bottom" title="New Banner"><i class="mdi mdi-plus mdi-24px"></i></a></h3>
+        <h3 class="mb-3">Banners <a href="{{url('/banners/add')}}" type="button" class="btn btn-sm bg-white text-dark float-right" data-toggle="tooltip" data-placement="bottom" title="New Banner"><i class="mdi mdi-plus mdi-24px"></i></a></h3>
         <div class="table-responsive">
             <table class="table">
                 <thead>
@@ -26,7 +26,7 @@
                             <td><img src="{{asset($item->image)}}" alt="" class="list-img"></td>
                             <td>{{$item->name}}</td>
                             <td>{{$item->status == 1 ? 'active':'inactive'}}</td>
-                            <td class="text-center"><a href="{{('/banners/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
+                            <td class="text-center"><a href="{{url('/banners/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
                         </tr>
                     @endforeach
                     @if (count($banners) == 0)

@@ -36,7 +36,7 @@
                             <td>{{$item->name}}</td>
                             <td>{{$item->amount}}</td>
                             <td>{{$item->status == 1 ? 'unscratched':'scratched'}}</td>
-                            <td class="text-center"><a href="{{('/scratch-cards/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
+                            <td class="text-center"><a href="{{url('/scratch-cards/edit/'.$item->id)}}" class="btn bg-light text-dark"><i class="mdi mdi-file-edit-outline"></i></a></td>
                         </tr>
                     @endforeach
                     @if (count($scratch_cards) == 0)

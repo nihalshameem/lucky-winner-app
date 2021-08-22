@@ -13,6 +13,7 @@ use App\Models\Customer;
 use App\Models\MinimumWithdraw;
 use App\Models\WithdrawRequest;
 use App\Models\Paid;
+use App\Models\RazorPayKey;
 use Session;
 use Validator;
 use Redirect;
@@ -51,6 +52,7 @@ class HomeController extends Controller
         $banner_total = count(Banner::all());
         $banner_active = count(Banner::where('status',1)->get());
         $banner_inactive = count(Banner::where('status',0)->get());
+        $payment_key = RazorPayKey::find(1);
         return view('home',[
             'categories' => $categories,
             'cash_card' => $cash_card,
@@ -66,6 +68,7 @@ class HomeController extends Controller
             'banner_total' => $banner_total,
             'banner_active' => $banner_active,
             'banner_inactive' => $banner_inactive,
+            'payment_key' => $payment_key->key,
         ]);
     }
 
@@ -74,6 +77,15 @@ class HomeController extends Controller
         return view('admin.profile.profile',[
             'profile' => $profile
         ]);
+    }
+
+    public function paymentKey(Request $request){
+        $payment_key = RazorPayKey::find(1);
+        $payment_key->key = $request->key;
+        $payment_key->save();
+        
+        Session::flash('success','Payment Key updated');
+        return redirect('/home');
     }
 
     public function profileUpdate(Request $request){

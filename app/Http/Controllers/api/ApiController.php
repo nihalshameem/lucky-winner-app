@@ -14,6 +14,7 @@ use App\Models\Customer;
 use App\Models\MinimumWithdraw;
 use App\Models\Wallet;
 use App\Models\WithdrawRequest;
+use App\Models\RazorPayKey;
 use Validator;
 
 class ApiController extends Controller
@@ -46,13 +47,29 @@ class ApiController extends Controller
         $cash_cards = CashCard::where('status', 1)->get();
         foreach ($cash_cards as $key => $value) {
             $category = Category::find($value->cat_id);
-            if ($category->status !== 1) {
+            if ($category->status != 1) {
                 $cash_cards->forget($key);
             }else{
                 $value->category = $category;
             }
         }
         return response()->json([
+            'cash_cards' => $cash_cards,
+        ]);
+    }
+
+    public function singleCategory($id){
+        $category = Category::where('id',$id)->where('status',1)->first();
+        if ($category == null) {
+            return response()->json([
+                'status' => '0',
+                'message' => 'Category Not Found!',
+            ]);
+        }
+        $cash_cards = CashCard::where('cat_id',$id)->where('status',1)->get();
+        return response()->json([
+            'status' => '1',
+            'category' => $id,
             'cash_cards' => $cash_cards,
         ]);
     }
@@ -177,7 +194,7 @@ class ApiController extends Controller
         if($wallet == null){
             return response()->json([
                 'status' => '0',
-                'message' => 'Wallet not found',
+                'message' => 'Wallet not found! create your Profile to continue.',
             ]);
         }
         $req = WithdrawRequest::where('user_id',$user->id)->first();
@@ -232,6 +249,13 @@ class ApiController extends Controller
         return response()->json([
             'status' => '1',
             'winners' => $winners,
+        ]);
+    }
+    public function paymentKey(){
+        $payment_key = RazorPayKey::find(1);
+        return response()->json([
+            'status' => '1',
+            'winners' => $payment_key->key,
         ]);
     }
 }

@@ -31,6 +31,7 @@ Route::namespace ('App\Http\Controllers\api')->group(function () {
 //customer cash cards
 Route::namespace ('App\Http\Controllers\api')->group(function () {
     Route::get('/customer/categories/{token}', 'ApiController@categories');
+    Route::get('/customer/cash-card/category/{cat_id}', 'ApiController@singleCategory');
     Route::get('/customer/cash-cards/{token}', 'ApiController@cashCards');
     Route::post('/customer/cash-cards/bid/{token}', 'ApiController@newBid');
     Route::get('/customer/scratch-cards/{token}', 'ApiController@scratchCards');
@@ -40,4 +41,5 @@ Route::namespace ('App\Http\Controllers\api')->group(function () {
     Route::get('/customer/minimum-withdraw/{token}', 'ApiController@minWithdraw');
     Route::get('/banners', 'ApiController@bannerList');
     Route::get('/winners', 'ApiController@winners');
+    Route::get('/payment-key', 'ApiController@paymentKey');
 });

@@ -31,6 +31,7 @@ Route::namespace ('App\Http\Controllers')->group(function () {
     Route::post('/profile/update', 'HomeController@profileUpdate');
     Route::post('/min-withdraw/update', 'HomeController@minWithdraw');
     Route::post('/withdraw-request/list', 'HomeController@minWithdraw');
+    Route::post('/payment-key/update', 'HomeController@paymentKey');
 });
 
 // Admin categories

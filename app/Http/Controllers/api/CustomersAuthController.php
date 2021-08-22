@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -125,6 +126,10 @@ class CustomersAuthController extends Controller
         $user->upi_id = $request->upi_id;
         $user->status = 1;
         $user->save();
+        Wallet::create([
+            'user_id' => $user->id,
+            'amount'=>0
+            ]);
         return response()->json([
             'status' => '1',
             'success' => 'Profile Updated'

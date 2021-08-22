@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
+    <div class="d-flex justify-content-between">
     <h1>Dashboard</h1>
+    <button class="btn bnt-sm btn-primary" data-toggle="modal" data-target="#paymentModal">Payment Key</button>
+    </div>
     <hr>
     <h4>Welcome back, {{ Auth::user()->name }}</h4>
     <div class="row justify-content-center equaller">
@@ -100,5 +103,32 @@
             </div>
         </div>
     </div>
+</div>
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Payment Key</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{url('payment-key/update')}}" method="post" id="payment-form">
+        @csrf
+        <div class="form-group row">
+            <label for="" class="col-3">Key :</label>
+            <div class="col-9">
+                <input type="text" class="form-control form-control-sm" name="key" value="{{$payment_key}}" require>
+            </div>
+        </div>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" form="payment-form" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection

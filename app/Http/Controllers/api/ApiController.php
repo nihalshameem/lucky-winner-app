@@ -238,14 +238,7 @@ class ApiController extends Controller
         ]);
     }
     public function winners(){
-        $winners = ScratchCard::where('status',0)->get();
-        foreach ($winners as $key  => $w) {
-            if((date('Y-m-d',strtotime($w->updated_at))) == date('Y-m-d')){
-                $w->username = Customer::find($w->user_id)->name;
-            }else{
-                $winners->forget($key);
-            }
-        }
+        $winners = ScratchCard::where('status',0)->where('updated_at','>=',date('Y-m-d'))->get();
         return response()->json([
             'status' => '1',
             'winners' => $winners,

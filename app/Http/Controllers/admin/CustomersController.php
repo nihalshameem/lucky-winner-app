@@ -45,7 +45,7 @@ class CustomersController extends Controller
     public function search(Request $request){
         $search = $request->search;
         if($search == null){
-            return redirect('/customers/list');
+            return redirect('customers/list');
         }
         $customers = Customer::where('name', 'LIKE', "%$search%")->orWhere('phone', 'LIKE', "%$search%")->orWhere('email', 'LIKE', "%$search%")->paginate(15);
         return view('admin.customers.customer-list',[
@@ -67,6 +67,6 @@ class CustomersController extends Controller
     public function delete($id){
         Customer::find($id)->delete();
         Session::flash('success','Customer deleted');
-        return redirect('/customers/list');
+        return redirect('customers/list');
     }
 }

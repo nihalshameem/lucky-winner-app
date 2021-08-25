@@ -36,7 +36,7 @@ class CategoriesController extends Controller
     public function search(Request $request){
         $search = $request->search;
         if($search == null){
-            return redirect('/categories/list');
+            return redirect('categories/list');
         }
         $categories = Category::where('name', 'LIKE', "%$search%")->paginate(15);
         return view('admin.categories.list',[
@@ -74,7 +74,7 @@ class CategoriesController extends Controller
         $new_card->image = $imageFilename;
         $new_card->save();
         Session::flash('success','Category added');
-        return redirect('/categories/list');
+        return redirect('categories/list');
     }
 
     public function editPage($id){
@@ -116,7 +116,7 @@ class CategoriesController extends Controller
         $update->image = $imageFilename;
         $update->save();
         Session::flash('success','Category updated');
-        return redirect('/categories/list');
+        return redirect('categories/list');
     }
 
     public function delete($id){
@@ -124,6 +124,6 @@ class CategoriesController extends Controller
         \File::delete(public_path($category->image));
         $category->delete();
         Session::flash('success','Category deleted');
-        return redirect('/categories/list');
+        return redirect('categories/list');
     }
 }

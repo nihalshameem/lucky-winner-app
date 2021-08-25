@@ -40,7 +40,7 @@ class CashCardsController extends Controller
     public function search(Request $request){
         $search = $request->search;
         if($search == null){
-            return redirect('/cash-cards/list');
+            return redirect('cash-cards/list');
         }
         $cash_cards = CashCard::where('name', 'LIKE', "%$search%")->paginate(15);
         return view('admin.cash_cards.list',[
@@ -83,7 +83,7 @@ class CashCardsController extends Controller
         $new_card->image = $imageFilename;
         $new_card->save();
         Session::flash('success','Cash card added');
-        return redirect('/cash-cards/list');
+        return redirect('cash-cards/list');
     }
 
     public function editPage($id){
@@ -138,7 +138,7 @@ class CashCardsController extends Controller
         $update->image = $imageFilename;
         $update->save();
         Session::flash('success','Cash card updated');
-        return redirect('/cash-cards/list');
+        return redirect('cash-cards/list');
     }
 
     public function delete($id){
@@ -146,6 +146,6 @@ class CashCardsController extends Controller
         \File::delete(public_path($cash_card->image));
         $cash_card->delete();
         Session::flash('success','Cash card deleted');
-        return redirect('/cash-cards/list');
+        return redirect('cash-cards/list');
     }
 }

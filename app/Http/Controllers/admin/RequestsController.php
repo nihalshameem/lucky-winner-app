@@ -57,7 +57,7 @@ class RequestsController extends Controller
         }
         $req->delete();
         Session::flash('success','Request Declined');
-        return redirect('/withdraw-request/list');
+        return redirect('withdraw-request/list');
     }
     public function paid($id){
         $req = WithdrawRequest::find($id);
@@ -81,7 +81,7 @@ class RequestsController extends Controller
         ]);
         $req->delete();
         Session::flash('success','Amount Paid');
-        return redirect('/withdraw-request/list');
+        return redirect('withdraw-request/list');
     }
     public function reqSheet(){
         $withdraw_req = WithdrawRequest::all();

@@ -57,6 +57,6 @@ class BidsController extends Controller
     public function delete($id){
         Bid::find($id)->delete();
         Session::flash('success','Bid deleted');
-        return redirect('/bids/list');
+        return redirect('bids/list');
     }
 }

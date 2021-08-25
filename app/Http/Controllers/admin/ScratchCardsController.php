@@ -38,7 +38,7 @@ class ScratchCardsController extends Controller
     public function search(Request $request){
         $search = $request->search;
         if($search == null){
-            return redirect('/scratch-cards/list');
+            return redirect('scratch-cards/list');
         }
         $scratch_cards = ScratchCard::where('name', 'LIKE', "%$search%")->paginate(15);
         return view('admin.scratch_cards.scratch-list',[
@@ -94,7 +94,7 @@ class ScratchCardsController extends Controller
         $new_card->image = $imageFilename;
         $new_card->save();
         Session::flash('success','Scratch card added');
-        return redirect('/scratch-cards/list');
+        return redirect('scratch-cards/list');
     }
     public function editPage($id){
         $scratch_card = ScratchCard::find($id);
@@ -147,7 +147,7 @@ class ScratchCardsController extends Controller
         $update->image = $imageFilename;
         $update->save();
         Session::flash('success','Cash card updated');
-        return redirect('/scratch-cards/list');
+        return redirect('scratch-cards/list');
     }
     public function winners(){
         $winners = ScratchCard::where('status',0)->get();
@@ -168,6 +168,6 @@ class ScratchCardsController extends Controller
         \File::delete(public_path($scratch_card->image));
         $scratch_card->delete();
         Session::flash('success','Scratch card deleted');
-        return redirect('/scratch-cards/list');
+        return redirect('scratch-cards/list');
     }
 }

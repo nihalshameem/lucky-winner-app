@@ -85,7 +85,7 @@ class HomeController extends Controller
         $payment_key->save();
         
         Session::flash('success','Payment Key updated');
-        return redirect('/home');
+        return redirect('home');
     }
 
     public function profileUpdate(Request $request){
@@ -106,13 +106,13 @@ class HomeController extends Controller
         }
         $profile->save();
         Session::flash('success','Profile updated');
-        return redirect('/profile');
+        return redirect('profile');
     }
     public function minWithdraw(Request $request){
         $min = MinimumWithdraw::find(1);
         $min->amount = $request->amount;
         $min->save();
         Session::flash('success','Minimum withdraw updated');
-        return redirect('/home');
+        return redirect('home');
     }
 }

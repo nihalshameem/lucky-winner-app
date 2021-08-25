@@ -62,7 +62,7 @@ class BannersController extends Controller
         $new_card->image = $imageFilename;
         $new_card->save();
         Session::flash('success','New banner added');
-        return redirect('/banners/list');
+        return redirect('banners/list');
     }
 
     public function editPage($id){
@@ -104,7 +104,7 @@ class BannersController extends Controller
         $update->image = $imageFilename;
         $update->save();
         Session::flash('success','Banner updated');
-        return redirect('/banners/list');
+        return redirect('banners/list');
     }
 
     public function delete($id){
@@ -112,6 +112,6 @@ class BannersController extends Controller
         \File::delete(public_path($banner->image));
         $banner->delete();
         Session::flash('success','Banner deleted');
-        return redirect('/banners/list');
+        return redirect('banners/list');
     }
 }

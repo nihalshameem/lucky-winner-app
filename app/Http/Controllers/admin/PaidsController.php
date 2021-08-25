@@ -46,7 +46,7 @@ class PaidsController extends Controller
     public function delete($id){
         Paid::find($id)->delete();
         Session::flash('success','Payment deleted');
-        return redirect('/paids/list');
+        return redirect('paids/list');
     }
     public function sheet(){
         $paids = Paid::all();
